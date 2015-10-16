@@ -139,7 +139,7 @@ public:
 	}
 	Rank search(T const & e, Rank lo, Rank hi){
 			binSearch(_elem, e, lo, hi);
-	}//查找失败则返回不大于e的最后一个元素
+	}//锟斤拷锟斤拷失锟斤拷锟津返回诧拷锟斤拷锟斤拷e锟斤拷锟斤拷锟斤拷一锟斤拷元锟斤拷
 	static Rank binSearch(T* A, T const&e, Rank lo, Rank hi){
 		while (lo<hi)
 		{
@@ -197,11 +197,23 @@ public:
 		int mi = (lo + hi) / 2;
 		mergeSort(lo, mi);
 		mergeSort(mi, hi);
+		merge(lo,hi,mi);
 
 	}
 	void merge(Rank lo, Rank mi, Rank hi) {
 		T* A = _elem + lo;
 		int lb = mi - lo;
+		T* B=new T[lb];
+		for(Rank i=0;i<lb;i++){
+			B[i]=A[i];
+		}
+		int lc=hi-mi;
+		T* C=_elem+mi;
+		for(Rank i=0,j=0,k=0;j<lb;){
+			if(lc<=k||B[j]<=C[k])A[i++]=B[j++];  //鍒犲幓鍐椾綑閫昏緫锛屼笉鐢ㄨ�冭檻j鏄惁瓒婄晫锛堣嫢B鎻愬墠瀹屾垚鍒機鍘熸湰灏变笉鐢ㄧЩ鍔級
+			if((k<lc)&&C[k]<B[j])A[i++]=C[k++];
+		}
+		delete B[];
 	}
 	T & operator[](Rank r) const { return _elem[r]; };
 private:
